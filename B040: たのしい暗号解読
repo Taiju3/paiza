@@ -1,0 +1,21 @@
+import string
+
+
+def translate(word, T, alphabets):
+    for i in range(len(word)):
+        index = T.index(word[i])
+        word[i] = alphabets[index]
+    return word
+        
+        
+n, T = input().split()
+n = int(n)
+T = list(T)
+alphabets = [i for i in list(string.ascii_letters)[0:26]]
+words = [list(i) for i in input().split()]
+for i in range(len(words)):
+    word = words[i]
+    for j in range(int(n)):
+        word = translate(word, T, alphabets)
+words = [''.join(i) for i in words]
+print(' '.join(words))
