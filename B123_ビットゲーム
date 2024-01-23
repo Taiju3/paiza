@@ -1,0 +1,57 @@
+def order_a(order_num, hand_num):
+    result = []
+    for i in range(3):
+        if order_num[i] == 0 and hand_num[i] == 0:
+            result.append(0)
+        else:
+            result.append(1)
+    return result
+
+
+def order_b(order_num, hand_num):
+    result = [x*y for x, y in zip(order_num, hand_num)]
+    return result
+    
+
+def order_c(order_num, hand_num):
+    result = []
+    for i in range(3):
+        if order_num[i] == hand_num[i]:
+            result.append(0)
+        else:
+            result.append(1)
+    return result
+    
+    
+def ordering(order_card, hand_card):
+    order = order_card[0]
+    if order == 'a':
+        result = order_a(order_card[1::], hand_card)
+    elif order == 'b':
+        result = order_b(order_card[1::], hand_card)
+    else:
+        result = order_c(order_card[1::], hand_card)
+    return result
+    
+
+N, M = [int(i) for i in input().split()]
+init_nums = []
+deck = []
+for i in range(N):
+    init_nums.append([int(j) for j in input().split()])
+for i in range(M):
+    pre_deck = input().split()
+    deck.append([pre_deck[0]] + [int(j) for j in pre_deck[1::]])
+results = []
+hand_nums = init_nums
+for i in range(M):
+    order_card = deck[i]
+    for j in range(N):
+        hand_nums[j] = ordering(order_card, hand_nums[j])
+for i in range(N):
+    hand_nums[i] = int(''.join(map(str, hand_nums[i])))
+maxes = [max(hand_nums)] * N
+points = [x - y for x, y in zip(hand_nums, maxes)]
+for i in range(N):
+    if points[i] == 0:
+        print(i+1)
