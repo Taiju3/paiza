@@ -1,0 +1,21 @@
+N = int(input())
+student_info = []
+for i in range(N):
+    student_info.append(input().split() + [0])
+student_info = {name: (int(height), 13-int(birth), int(point)) for [name, height, birth, point] in student_info}
+# height_sorted = sorted(student_info.items(), key=lambda x: (x[1][0]))
+# birth_sorted = sorted(student_info.items(), key=lambda x: x[1][1])
+# name_sorted = sorted(student_info.items(), key=lambda x: x[0])
+totally_sorted = sorted(student_info.items(), key=lambda x: (x[1][0], x[1][1], x[0]))
+   
+#print(totally_sorted)
+
+# print(height_sorted)
+# for i in range(len(height_sorted)-1):
+#     if height_sorted[i][1][0] == height_sorted[i+1][1][0]:
+#         if height_sorted[i][1][1] > height_sorted[i+1][1][1]
+        
+    
+
+for i in range(len(totally_sorted)):
+    print(totally_sorted[i][0])
