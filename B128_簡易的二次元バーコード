@@ -1,0 +1,28 @@
+import numpy as np
+
+
+def num_to_grid(num):
+    grid = np.full(9, '.')
+    grid[0:num] = '#'
+    grid = grid.reshape(3, 3)
+    return grid
+
+s = input()
+s = [int(i) for i in list(s)]
+
+grids = []
+for num in s:
+    grid = num_to_grid(num)
+    grids.append(grid)
+
+shape = [len(grids)//3] + [3]*3
+    
+grids = np.array(grids)
+grids = grids.reshape(shape)
+result = []
+for i in range(len(grids)):
+    for j in range(len(grids[0])):
+        result.append(np.hstack([grids[i][0][j], grids[i][1][j], grids[i][2][j]]))
+
+for i in result:
+    print(''.join(i))
