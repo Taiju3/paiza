@@ -1,0 +1,15 @@
+import collections
+
+
+H, W = [int(i) for i in input().split()]
+N, T = [int(i) for i in input().split()]
+positions = []
+for i in range(N):
+    positions.append(input())
+counter = collections.Counter(positions)
+mice = sorted(list(counter.values()), reverse=True)
+if T >= len(mice):
+    caught = sum(mice)
+else:
+    caught = sum(mice[:T])
+print(caught)
