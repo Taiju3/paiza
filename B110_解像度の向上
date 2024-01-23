@@ -1,0 +1,35 @@
+import itertools
+
+
+H, W = [int(i) for i in input().split()]
+picture1 = []
+picture2 = []
+add_list = []
+for i in range(H):
+    for j in input().split():
+        add_list.extend([int(j), int(j)])
+    picture1.append(add_list)
+    picture1.append(add_list)
+    add_list = []
+for i in range(H):
+    for j in input().split():
+        add_list.extend([int(j), int(j)])
+    picture2.append(add_list)
+    picture2.append(add_list)
+    add_list = []
+del picture1[0]
+for i in range(2*H-1):
+  picture1[i] = picture1[i][1::]
+del picture2[-1]
+for i in range(2*H-1):
+  picture2[i] = picture2[i][0:-1]
+
+picture1 = list(itertools.chain.from_iterable(picture1))
+picture2 = list(itertools.chain.from_iterable(picture2))
+integrated_picture = [int((x + y)/2) for x, y in zip(picture1, picture2)]
+for i in range(len(integrated_picture)):
+    if (i+1)%(2*W-1):
+        print(integrated_picture[i], end=' ')
+    else:
+        print(integrated_picture[i])
+    
