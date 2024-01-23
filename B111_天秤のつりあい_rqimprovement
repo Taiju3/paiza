@@ -1,0 +1,43 @@
+import math
+
+
+def combination(n, r):
+    ans = math.factorical(n)/(math.factorical(r)*math.factorical(n-r))
+    return ans
+
+
+N = int(input())
+weights = [int(weight) for weight in input().split()]
+weights = sorted(weights)
+total = sum(weights)
+ideal_value = total/2
+
+while len(weights) > 2:
+    if len(weights) % 2:
+        standard_index = int(len(weights)/2)
+        around_indexes = [standard_index-1, standard_index+1]
+        compounds = [weights[standard_index] + weights[standard_index-1], weights[standard_index] + weights[standard_index+1]]
+        nexters_0 = [compounds[0] + weights[i] for i in range(len(weights))]
+        nexters_0.remove(compounds[0] + weights[standard_index])
+        nexters_0.remove(compounds[0] + weights[standard_index-1])
+        nexters_1 = [compounds[1] + weights[i] for i in range(len(weights))]
+        nexters_1.remove(compounds[1] + weights[standard_index])
+        nexters_1.remove(compounds[1] + weights[standard_index+1])
+        #deltas = [abs(ideal_value - compounds[i]) for i in range(2)]
+        deltas_0 = [abs(ideal_value - nexters_0[i]) for i in range(len(nexters_0))]
+        deltas_1 = [abs(ideal_value - nexters_1[i]) for i in range(len(nexters_1))]
+        deltas = [deltas_0, deltas_1]
+        nearer_index = deltas.index(min(deltas))
+        del_index = around_indexes[nearer_index]
+        replace_index = standard_index
+        weights[replace_index] = compounds[nearer_index]
+        del weights[del_index]
+        weights = sorted(weights)
+    else:
+        standard_index = int(len(weights)/2)
+        compound = weights[standard_index] + weights[standard_index-1]
+        weights[standard_index] = compound
+        del weights[standard_index-1]
+        weights = sorted(weights)
+        
+print(abs(weights[0] - weights[1]))
