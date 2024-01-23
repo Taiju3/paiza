@@ -1,0 +1,27 @@
+import itertools
+
+
+H, W = [int(i) for i in input().split()]
+fish = []
+for i in range(H):
+    fish.append([int(j) for j in input().split()])
+#print(fish)
+R, C = [int(i) for i in input().split()]
+network = []
+for i in range(R):
+    network.append(list(input()))
+network = list(itertools.chain.from_iterable(network))
+for i in range(R*C):
+    if network[i] == '#':
+        network[i] = 1
+    else:
+        network[i] = 0
+harvests = []
+for i in range(H - R + 1):
+    for j in range(W - C + 1):
+        part_fish = fish[i: i+R]
+        part_fish = list(itertools.chain.from_iterable([i[j: j+C] for i in part_fish]))
+        harvest = sum([x * y for x, y in zip(network, part_fish)])
+        harvests.append(harvest)
+print(max(harvests))
+        
