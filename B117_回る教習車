@@ -1,0 +1,23 @@
+def judge(cars):
+    if cars[0] == max(cars):
+        counter 
+        
+        
+cars = []
+N = int(input())
+for i in range(N):
+    cars.append(int(input()))
+counter = 0
+while len(cars) != 0:
+    a = cars[0]
+    if a != max(cars) and a != min(cars):
+        cars.remove(a)
+        cars.append(a)
+    elif a == min(cars):
+        cars.remove(a)
+    else:
+        counter += 1
+        cars.remove(a)
+        cars.append(a)
+    #print(cars)
+print(counter)
