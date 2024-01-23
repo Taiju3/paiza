@@ -1,0 +1,23 @@
+n, m = [int(i) for i in input().split()]
+h, w = [int(i) for i in input().split()]
+cultivation_infos = []
+for i in range(n):
+    cultivation_infos.append(input().split())
+field = [['.' for i in range(w)] for i in range(h)]
+harvests = []
+for i in range(n):
+    cultivation_info = cultivation_infos[i]
+    for row in range(int(cultivation_info[0])-1, int(cultivation_info[1])):
+        for col in range(int(cultivation_info[2])-1, int(cultivation_info[3])):
+            harvests.append(field[row][col])
+            field[row][col] = cultivation_info[4]
+# print(m)
+# print(harvests)
+for i in range(m):
+    count = harvests.count(str(i+1))
+    print(count)
+for i in range(h):
+    result = ''.join(field[i])
+    print(result)
+# l = [1, 2, 3, 4]
+# print(l.count(1))
