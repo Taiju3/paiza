@@ -1,0 +1,43 @@
+import copy
+import time
+
+start = time.time()
+def Dilation(pixels):
+    copied_pixels = copy.deepcopy(pixels)
+    for pixel_row_i in range(1, H+1):
+        for i in range(1, W+1):
+            around = [pixels[pixel_row_i][i-1], pixels[pixel_row_i][i+1], pixels[pixel_row_i-1][i], pixels[pixel_row_i+1][i]]
+            if '#' in around:
+                copied_pixels[pixel_row_i][i] = '#'
+    return copied_pixels
+
+def Erosion(pixels):
+    copied_pixels = copy.deepcopy(pixels)
+    for pixel_row_i in range(1, H+1):
+        for i in range(1, W+1):
+            around = [pixels[pixel_row_i][i-1], pixels[pixel_row_i][i+1], pixels[pixel_row_i-1][i], pixels[pixel_row_i+1][i]]
+            if '.' in around:
+                copied_pixels[pixel_row_i][i] = '.'
+    return copied_pixels
+        
+
+
+H, W, N = [int(i) for i in input().split()]
+pixels = [['N'] * (W+2)]
+for i in range(H):
+    pixels.append(['N'] + list(input()) + ['N'])
+pixels.append(['N'] * (W+2))
+#print(pixels)
+operations = list(input())
+#print(operations)
+for i in operations:
+    if i == 'D':
+        pixels = Dilation(pixels)
+    else:
+        pixels = Erosion(pixels)
+pixels = pixels[1:-1]
+for i in range(len(pixels)):
+    pixel_row = ''.join(pixels[i])
+    print(pixel_row.strip('N'))
+end = time.time()
+#print(end - start)
