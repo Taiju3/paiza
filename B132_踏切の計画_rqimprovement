@@ -1,0 +1,22 @@
+N, c = input().split()
+N = int(N)
+c = int(c)
+train_times = []
+for i in range(N):
+    train_times.append(int(input()))
+continue_times = []
+for i in range(N-1):
+    if train_times[i+1] - c <= train_times[i]:
+        continue_times.append(train_times[i+1] - train_times[i] + c)
+    else:
+        continue_times.append(0)
+new_continue_times = []
+added_time = 0
+for i in range(len(continue_times)):
+    if continue_times[i] != 0:
+        added_time += continue_times[i] - c
+    else:
+        new_continue_times.append(added_time + c)
+        added_time = 0
+continue_times += new_continue_times
+print(max(continue_times))
