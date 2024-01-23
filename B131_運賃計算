@@ -1,0 +1,21 @@
+N, M = input().split()
+N = int(N)
+M = int(M)
+fee_list = []
+for i in range(N):
+    fee_list.append(input().split())
+X = int(input())
+throuth_list = []
+for i in range(X):
+    throuth_list.append(input().split())
+total_fee = 0
+R0 = int(throuth_list[0][0])
+S0 = int(throuth_list[0][1])
+total_fee += int(fee_list[R0-1][S0-1])
+for i in range(1, X):
+    R = int(throuth_list[i][0])
+    S = int(throuth_list[i][1])
+    S_before = int(throuth_list[i-1][1])
+    total_fee += abs(int(fee_list[R-1][S_before-1]) - int(fee_list[R-1][S-1]))
+    
+print(total_fee)
