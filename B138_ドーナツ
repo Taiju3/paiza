@@ -1,0 +1,18 @@
+H, W = input().split()
+H = int(H)
+W = int(W)
+str_list = []
+for i in range(H):
+    str_list.append(input())
+donuts_counter = 0
+for h in range(H-2):
+    for w in range(W-2):
+        h_i = str_list[h]
+        h_ii = str_list[h+1]
+        h_iii = str_list[h+2]
+        if h_i[w] == h_i[w+1] == h_i[w+2] == '#':
+            if h_ii[w] == h_ii[w+2] == '#' and h_ii[w+1] == '.':
+                if h_iii[w] == h_iii[w+1] == h_iii[w+2] == '#':
+                    donuts_counter += 1
+
+print(donuts_counter)            
