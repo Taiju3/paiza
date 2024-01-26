@@ -1,3 +1,4 @@
+#失敗版
 import time
 start = time.time()
 N = int(input())
@@ -22,3 +23,22 @@ print(counter)
 
 end = time.time()
 #print(end-start)
+
+
+#成功版
+N = int(input())
+words = []
+for i in range(N):
+    words.append(sorted(list(input())))
+lengthes = [len(i) for i in words]
+connected_words = []
+for i in range(N):
+    for j in range(i, N):
+        if len(words[i] + words[j]) in lengthes:
+            connected_words.append(sorted(words[i] + words[j]))
+counter = 0
+for i in connected_words:
+    for j in words:
+        if i == (j):
+            counter += 1
+print(counter)
