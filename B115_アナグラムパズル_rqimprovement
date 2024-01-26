@@ -1,0 +1,24 @@
+import time
+start = time.time()
+N = int(input())
+words = []
+for i in range(N):
+    words.append(list(input()))
+sorted_word_list = [sorted(word) for word in words]
+sorted_word_set = {tuple(sorted(word)) for word in words}
+words_dict = {word_set: sorted_word_list.count(word_list) for word_set, word_list in zip(sorted_word_set, sorted_word_list)}
+#print(words_dict)
+connected_words = []
+lengthes = [len(i) for i in words]
+for i in range(N):
+    for j in range(i, N):
+        if len(words[i]) + len(words[j]) in lengthes:
+            connected_words.append(sorted(words[i] + words[j]))
+counter = 0
+for i in connected_words:
+    if tuple(i) in list(words_dict.keys()):
+        counter += words_dict[tuple(i)]
+print(counter)
+
+end = time.time()
+#print(end-start)
