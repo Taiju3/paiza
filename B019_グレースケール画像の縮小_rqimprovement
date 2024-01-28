@@ -1,0 +1,23 @@
+N, K = [int(i) for i in input().split()]
+pixels = []
+for i in range(N):
+    pixels.append([int(i) for i in input().split()])
+new_pixels = []
+i_start = -K
+j_start = -K
+for l in range(int(N/K)):
+    j_start = -K
+    i_start += K
+    for k in range(int(N/K)):
+        sum_of_part = 0
+        j_start += K
+        for i in range(i_start, i_start+K):
+            for j in range(j_start, j_start+K):
+                sum_of_part += pixels[i][j]
+        avg_of_part = int(sum_of_part/K**2)
+        new_pixels.append(avg_of_part)
+for i in range(len(new_pixels)):
+    if i % (N/K) != (N/K) - 1:
+        print(new_pixels[i], end=' ')
+    else:
+        print(new_pixels[i])
