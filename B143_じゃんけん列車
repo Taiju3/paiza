@@ -1,0 +1,16 @@
+#失敗作
+N, M = [int(i) for i in input().split()]
+wl_results = []
+for i in range(M):
+    wl_results.append([int(i) for i in input().split()])
+students = ['1', '2', '3', '4', '5']
+for wl_list in wl_results:
+    w = wl_list[0]
+    l = wl_list[1]
+    students[w-1] += students[l-1]
+    students[l-1] = '0'
+lengthes = [len(i) for i in students]
+lenmax = max(lengthes)
+for i in range(len(students)):
+    if len(students[i]) == lenmax:
+        print(students[i][0])
